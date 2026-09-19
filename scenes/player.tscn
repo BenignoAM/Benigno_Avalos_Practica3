@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://bwhlkliwp13p4"]
+
+[ext_resource type="Script" uid="uid://6s0lxctks3qn" path="res://scripts/player.gd" id="1_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://b2aofu01vxvea" path="res://assets/playerGrey_walk1.png" id="2_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://ddjou2q6gxlfr" path="res://assets/playerGrey_walk2.png" id="3_fjrip"]
+[ext_resource type="Texture2D" uid="uid://bcow5c46vixno" path="res://assets/playerGrey_up1.png" id="4_smehm"]
+[ext_resource type="Texture2D" uid="uid://dw3lwgwhpbfx8" path="res://assets/playerGrey_up2.png" id="5_ur7pv"]
+
+[sub_resource type="SpriteFrames" id="1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tuyoq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fjrip")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_smehm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ur7pv")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="2"]
+radius = 27.0
+height = 68.0
+
+[sub_resource type="Gradient" id="3"]
+colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="4"]
+gradient = SubResource("3")
+
+[sub_resource type="Curve" id="5"]
+_data = [Vector2(0.00501098, 0.5), 0.0, 0.0, 0, 0, Vector2(0.994989, 0.324), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="6"]
+curve = SubResource("5")
+
+[sub_resource type="ParticleProcessMaterial" id="7"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("6")
+color_ramp = SubResource("4")
+
+[node name="Player" type="Area2D" unique_id=2141725708]
+z_index = 10
+script = ExtResource("1_qlg0r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1437394421]
+scale = Vector2(0.45, 0.45)
+sprite_frames = SubResource("1")
+animation = &"right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1954506745]
+shape = SubResource("2")
+
+[node name="Trail" type="GPUParticles2D" parent="." unique_id=1747300857]
+z_index = -1
+amount = 10
+texture = ExtResource("2_tuyoq")
+speed_scale = 2.0
+process_material = SubResource("7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

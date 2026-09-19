@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://d2l8jpx5efigu"]
+
+[ext_resource type="Script" uid="uid://dh8hc444f58ti" path="res://scripts/papel.gd" id="1_o4lrf"]
+[ext_resource type="Texture2D" uid="uid://v28xygfddg2y" path="res://assets/paper.png" id="2_2m2y6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_586gl"]
+size = Vector2(80, 79)
+
+[node name="Papel" type="Area2D" unique_id=805786961]
+script = ExtResource("1_o4lrf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1802866378]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_2m2y6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=638298206]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_586gl")

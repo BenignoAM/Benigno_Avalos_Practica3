@@ -1,0 +1,1 @@
+El ejecutable se encuentra comprimido en este zip debido a la restricción de subida de archivos >100MB en repositorios de GitHub.
